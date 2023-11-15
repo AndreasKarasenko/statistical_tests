@@ -13,6 +13,10 @@ st.markdown("""
         is: the tests only tell IF there is a significant between ANY group, but not which. For that case you conduct so-called post-hoc tests.
         
         In Python the main way to conduct any statistical test is to use scipy and scikit_posthocs (see the requirements.txt).
+        
+        We will get 2 values usually, an F-value (or similar) and a p-value.
+        The p-value is the probability of observing a test statistic as large or larger than what we observed. We test this value
+        against a critical threshold (usually 0.05).
         """)
 
 

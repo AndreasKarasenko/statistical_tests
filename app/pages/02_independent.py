@@ -1,4 +1,5 @@
 import streamlit as st
+
 st.set_page_config(layout="wide")
 
 st.title("Independent")
@@ -33,7 +34,31 @@ with col2.expander("More than two groups"):
                     For statistical tests of dependent samples with more than exactly 2 groups
                     we can conduct a simple one-way ANOVA, or the Kruskal-Wallis test.
                     
-                    The one-way ANOVA found as ```scipy.stats.f_oneway```
                     
-                    whereas the Kruskal-Wallis test is ```scipy.stats.kruskal```
+                    
+                    
                     """)
+        col11, col22 = st.columns(2)
+        col11.markdown("The one-way ANOVA found as ```scipy.stats.f_oneway```")
+        anova_button = col11.button("run example", key="anova")
+        
+        col22.markdown("The Kruskal-Wallis test is ```scipy.stats.kruskal```")
+        kruskal_button = col22.button("run example", key="kruskal")
+       
+        dataframe = st.dataframe
+        col2_markdown = st.markdown
+        
+        if anova_button:
+                from resources.data.build_random_independent import normal_independent_group
+                from utils.evaluate_independent import evaluate_normal_group
+                data = normal_independent_group()
+                results = evaluate_normal_group(data)
+                dataframe(data)
+                col2_markdown(f"P-value: {results}")
+        if kruskal_button:
+                from resources.data.build_random_independent import nonnormal_independent_group
+                from utils.evaluate_independent import evaluate_nonnormal_group
+                data = nonnormal_independent_group()
+                results = evaluate_nonnormal_group(data)
+                dataframe(data)
+                col2_markdown(f"P-value: {results}")
